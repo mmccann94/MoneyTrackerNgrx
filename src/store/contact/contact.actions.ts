@@ -1,7 +1,5 @@
-import { Contact } from "../../models/contact";
-import { Injectable } from "@angular/core";
-import {Action} from '@ngrx/store';
-import { MTAction } from "../mt-action";
+import { Contact } from "../../domain/contact";
+import { Action } from "@ngrx/store";
 
 export enum ContactActionTypes {
     AddContact = '[Contact] Add',
@@ -10,28 +8,28 @@ export enum ContactActionTypes {
     LoadContact = '[Contact] Load',
 }
 
-export class Add implements MTAction {
+export class AddContact implements Action {
     readonly type = ContactActionTypes.AddContact;
   
     constructor(public payload: Contact) {}
 }
 
-export class Update implements MTAction {
+export class UpdateContact implements Action {
     readonly type = ContactActionTypes.UpdateContact;
   
     constructor(public payload: Contact) {}
 }
 
-export class Remove implements MTAction {
+export class RemoveContact implements Action {
     readonly type = ContactActionTypes.RemoveContact;
   
     constructor(public payload: Contact) {}
 }
 
-export class Load implements MTAction {
+export class LoadContact implements Action {
     readonly type = ContactActionTypes.LoadContact;
   
     constructor(public payload: Contact) {}
 }
 
-export type ContactActions = Add | Update | Remove | Load;
+export type ContactAction = AddContact | UpdateContact | RemoveContact | LoadContact;
