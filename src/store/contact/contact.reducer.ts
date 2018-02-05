@@ -1,32 +1,53 @@
 import { Contact } from "../../domain/contact";
-import { ContactAction, ContactActionTypes } from "./contact.actions";
+import * as actions from "./contact.actions";
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createFeatureSelector } from "@ngrx/store/src/selector";
+import { ContactsState } from "./contact.state";
 
-export interface ContactState {
-    contacts: Contact[];
+export const contactAdapter = createEntityAdapter<Contact>();
+
+export interface ContactState extends EntityState<Contact> {
+};
+
+const defaultContact = {
+  ids: ['1', '2'],
+  entities: {
+    '1': {
+      id: '1',
+      name: 'Marty',
+      balance: 5
+    }, 
+    '2': {
+      id: '2',
+      name: 'Rianne',
+      balance: -5
+    }
   }
 
-  const initialState: ContactState = {contacts: [{id: 1, name: 'Marty', balance: 25}, {id: 2, name: 'Rianne', balance: -30}]};
+}
 
-  export const reducer  = (state: ContactState = initialState, action: ContactAction): ContactState => {
-    switch (action.type) {
-      case ContactActionTypes.AddContact:
-        return {
-            ...state, 
-            contacts:[...state.contacts, action.payload]
-        };
-      case ContactActionTypes.UpdateContact:
-        return {
-            ...state,
-            contacts: state.contacts.map(contact => contact.id === action.payload.id ? Object.assign({}, contact, action.payload) : contact)
-        };
-      case ContactActionTypes.RemoveContact:
-        return {
-            ...state,
-            contacts: state.contacts.filter(contact => contact.id === action.payload.id)
-        }
-      case ContactActionTypes.LoadContact:
-        return;
-      default:
-        return state;
-    }
-  };
+const initialState: ContactState = contactAdapter.getInitialState(defaultContact);
+
+export const contactReducer = (state: ContactState = initialState, action: actions.ContactActions): ContactState => {
+  switch (action.type) {
+    case actions.CREATE:
+      return contactAdapter.addOne(action.payload, state);
+    case actions.UPDATE:
+      return contactAdapter.updateOne({id: action.id, changes: action.changes}, state);
+    case actions.DELETE:
+      return contactAdapter.removeOne(action.id, state);
+    case actions.LOAD:
+      return state;
+    default:
+      return state;
+  }
+};
+
+export const getContactState = createFeatureSelector<ContactState>('contact');
+
+export const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal
+} = contactAdapter.getSelectors(getContactState);

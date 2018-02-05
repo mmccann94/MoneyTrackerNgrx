@@ -1,35 +1,29 @@
 import { Contact } from "../../domain/contact";
 import { Action } from "@ngrx/store";
 
-export enum ContactActionTypes {
-    AddContact = '[Contact] Add',
-    UpdateContact = '[Contact] Update',
-    RemoveContact = '[Contact] Remove',
-    LoadContact = '[Contact] Load',
-}
+export const CREATE = '[Contacts] Add'
+export const LOAD = '[Contacts] Load'
+export const UPDATE = '[Contacts] Update'
+export const DELETE = '[Contacts] Delete'
 
-export class AddContact implements Action {
-    readonly type = ContactActionTypes.AddContact;
-  
+export class Create implements Action {
+    readonly type = CREATE;
     constructor(public payload: Contact) {}
 }
 
-export class UpdateContact implements Action {
-    readonly type = ContactActionTypes.UpdateContact;
-  
-    constructor(public payload: Contact) {}
+export class Load implements Action {
+    readonly type = LOAD;
+    constructor(public id: string) {}
 }
 
-export class RemoveContact implements Action {
-    readonly type = ContactActionTypes.RemoveContact;
-  
-    constructor(public payload: Contact) {}
+export class Update implements Action {
+    readonly type = UPDATE;
+    constructor(public id, public changes: Partial<Contact>) {}
 }
 
-export class LoadContact implements Action {
-    readonly type = ContactActionTypes.LoadContact;
-  
-    constructor(public payload: Contact) {}
+export class Delete implements Action {
+    readonly type = DELETE;
+    constructor(public id: string) {}
 }
 
-export type ContactAction = AddContact | UpdateContact | RemoveContact | LoadContact;
+export type ContactActions = Create | Load | Update | Delete;

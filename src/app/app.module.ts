@@ -10,6 +10,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from '../store/reducers/index';
+import { ContactModule } from '../store/contact/contact.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    StoreModule.forRoot(reducers),
+    ContactModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
