@@ -11,8 +11,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../store/reducers/index';
-import { ContactModule } from '../store/contact/contact.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ContactsModule } from '../store/contacts/contacts.module';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,10 @@ import { ContactModule } from '../store/contact/contact.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    StoreModule.forRoot(reducers),
-    ContactModule
+    ContactsModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,7 +41,7 @@ import { ContactModule } from '../store/contact/contact.module';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { Contact } from "./contact";
 
 export interface Transaction {
-    contact: Contact;
+    id: string;
     amount: number;
     timestamp: number;
 }

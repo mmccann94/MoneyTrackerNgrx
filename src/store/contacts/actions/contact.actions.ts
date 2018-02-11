@@ -1,5 +1,5 @@
-import { Contact } from "../../domain/contact";
 import { Action } from "@ngrx/store";
+import { Contact } from "../../../model/contact";
 
 export const CREATE = '[Contacts] Add'
 export const LOAD = '[Contacts] Load'

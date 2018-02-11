@@ -1,17 +1,16 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      <!-- {{selectedContact$.name | async}} -->
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+    <ion-list-header>Transactions</ion-list-header>
+    <ion-item *ngFor="let transaction of transactions$ | async">
+      {{transaction.amount}}
     </ion-item>
   </ion-list>
 </ion-content>
