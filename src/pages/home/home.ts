@@ -8,6 +8,8 @@ import * as contactActions from '../../store/contacts/actions/contact.actions';
 import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
 import { Transaction } from '../../model/transaction';
 import { ContactPage } from '../contact/contact';
+import { AlertService } from '../../core/alert/alert.service';
+import { AlertType } from '../../core/alert/alert-data';
 
 @Component({
   selector: 'page-home',
@@ -17,18 +19,22 @@ export class HomePage {
 
   public contacts$: Observable<any>;
 
-  constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>) {
+  constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>, private alertService: AlertService) {
     this.getStoreData();
   }
 
-  getStoreData(): any {
-    this.contacts$ = this.store.select(fromContacts.getAllContacts);
+  private addNew() {
+    this.alertService.activate(AlertType.ADD_NEW_CONTACT);
   }
 
-  cardSelected(contact: Contact) {
+  private cardSelected(contact: Contact) {
     console.log('contactSelected', contact)
     this.store.dispatch(new contactActions.Load(contact.id));
     this.navCtrl.push(ContactPage);
+  }
+
+  private getStoreData(): any {
+    this.contacts$ = this.store.select(fromContacts.getAllContacts);
   }
 
 }

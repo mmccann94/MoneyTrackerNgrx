@@ -13,6 +13,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ContactsModule } from '../store/contacts/contacts.module';
+import { CoreModule } from '../core/core.module';
+import { AlertService } from '../core/alert/alert.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { ContactsModule } from '../store/contacts/contacts.module';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ContactsModule,
+    CoreModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })
@@ -36,12 +39,13 @@ import { ContactsModule } from '../store/contacts/contacts.module';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AlertService
   ]
 })
 export class AppModule {}
