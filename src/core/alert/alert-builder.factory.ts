@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class AlertBuilderFactory  {
 
-    constructor(private alertCtrl: AlertController){}
+    constructor(private alertCtrl: AlertController) {}
 
     getBuilder(alertType: AlertType): AlertBuilder {
         switch(alertType) {
