@@ -1,11 +1,11 @@
 import { AlertBuilder } from "./alert.builder";
-import { AlertController } from "ionic-angular";
+import { AlertController, Alert } from "ionic-angular";
 
 export class AddNewContactAlertBuilder implements AlertBuilder {
 
     constructor(private alertCtrl: AlertController) {}
 
-    build() {
+    build(): Alert {
         return this.alertCtrl.create({
             title: 'Create New',
             inputs: [

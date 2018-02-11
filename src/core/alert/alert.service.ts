@@ -6,9 +6,7 @@ import { AlertBuilderFactory } from "../alert/alert-builder.factory";
 @Injectable()
 export class AlertService {
 
-    constructor(private alertCtrl: AlertController, private alertBuilderFactory: AlertBuilderFactory) {
-
-    }
+    constructor(private alertCtrl: AlertController, private alertBuilderFactory: AlertBuilderFactory) {}
 
     activate(alertType: AlertType) {
         let alert = this.alertBuilderFactory.getBuilder(alertType).build();
