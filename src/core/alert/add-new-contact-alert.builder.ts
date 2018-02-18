@@ -16,10 +16,7 @@ export class AddNewContactAlertBuilder implements AlertBuilder {
             ],
             buttons: [
               {
-                text: 'Cancel',
-                handler: data => {
-                  callback(data);
-                }
+                text: 'Cancel'
               },
               {
                 text: 'Save',
