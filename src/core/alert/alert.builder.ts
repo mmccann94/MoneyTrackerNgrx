@@ -2,6 +2,6 @@ import { Alert } from "ionic-angular";
 
 export interface AlertBuilder {
 
-    build(): Alert;
+    build(callback: (data) => void): Alert;
 
 }

@@ -8,8 +8,8 @@ export class AlertService {
 
     constructor(private alertCtrl: AlertController, private alertBuilderFactory: AlertBuilderFactory) {}
 
-    activate(alertType: AlertType) {
-        let alert = this.alertBuilderFactory.getBuilder(alertType).build();
+    activate(alertType: AlertType, callback: (data) => void) {
+        let alert = this.alertBuilderFactory.getBuilder(alertType).build(callback);
         alert.present();
     }
 

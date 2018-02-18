@@ -10,6 +10,7 @@ import { Transaction } from '../../model/transaction';
 import { ContactPage } from '../contact/contact';
 import { AlertService } from '../../core/alert/alert.service';
 import { AlertType } from '../../core/alert/alert-data';
+import { ContactBuilder } from '../../core/contact.builder';
 
 @Component({
   selector: 'page-home',
@@ -19,16 +20,25 @@ export class HomePage {
 
   public contacts$: Observable<any>;
 
-  constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>, private alertService: AlertService) {
+  constructor(public navCtrl: NavController, 
+    private store: Store<fromContacts.ContactsState>, 
+    private alertService: AlertService) {
     this.getStoreData();
   }
 
   private addNew() {
-    this.alertService.activate(AlertType.ADD_NEW_CONTACT);
+    this.alertService.activate(AlertType.ADD_NEW_CONTACT, (data) => {
+      if(data) {
+        let contact: Contact = new ContactBuilder()
+        .setName(data.name)
+        .build();
+        
+        this.store.dispatch(new contactActions.Create(contact));
+      }
+    });
   }
 
   private cardSelected(contact: Contact) {
-    console.log('contactSelected', contact)
     this.store.dispatch(new contactActions.Load(contact.id));
     this.navCtrl.push(ContactPage);
   }

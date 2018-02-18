@@ -5,7 +5,7 @@ export class AddNewContactAlertBuilder implements AlertBuilder {
 
     constructor(private alertCtrl: AlertController) {}
 
-    build(): Alert {
+    build(callback: (data) => void): Alert {
         return this.alertCtrl.create({
             title: 'Create New',
             inputs: [
@@ -18,13 +18,13 @@ export class AddNewContactAlertBuilder implements AlertBuilder {
               {
                 text: 'Cancel',
                 handler: data => {
-                  console.log('Cancel clicked');
+                  callback(data);
                 }
               },
               {
                 text: 'Save',
                 handler: data => {
-                  console.log('Saved clicked');
+                  callback(data);
                 }
               }
             ]
