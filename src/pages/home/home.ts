@@ -20,22 +20,22 @@ export class HomePage {
 
   public contacts$: Observable<any>;
 
-  constructor(public navCtrl: NavController, 
-    private store: Store<fromContacts.ContactsState>, 
-    private alertService: AlertService) {
+  private addNewContactCallback = (data: any) => {
+    if(data) {
+      let contact: Contact = new ContactBuilder()
+      .setName(data.name)
+      .build();
+      
+      this.store.dispatch(new contactActions.Create(contact));
+    }
+  };
+
+  constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>, private alertService: AlertService) {
     this.getStoreData();
   }
 
   private addNew() {
-    this.alertService.activate(AlertType.ADD_NEW_CONTACT, (data) => {
-      if(data) {
-        let contact: Contact = new ContactBuilder()
-        .setName(data.name)
-        .build();
-        
-        this.store.dispatch(new contactActions.Create(contact));
-      }
-    });
+    this.alertService.activate(AlertType.ADD_NEW_CONTACT, this.addNewContactCallback);
   }
 
   private cardSelected(contact: Contact) {
