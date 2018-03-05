@@ -19,32 +19,42 @@ import { ContactBuilder } from '../../core/contact.builder';
 export class HomePage {
 
   public contacts$: Observable<any>;
-
-  private addNewContactCallback = (data: any) => {
-    if(data) {
-      let contact: Contact = new ContactBuilder()
-      .setName(data.name)
-      .build();
-      
-      this.store.dispatch(new contactActions.Create(contact));
-    }
-  };
+  public selectedContact$: Observable<any>;
 
   constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>, private alertService: AlertService) {
     this.getStoreData();
+    this.subscribeToSelectedContact();
   }
 
   private addNew() {
     this.alertService.activate(AlertType.ADD_NEW_CONTACT, this.addNewContactCallback);
   }
 
+  private addNewContactCallback = (data: any) => {
+    if(data) {
+      let contact: Contact = new ContactBuilder()
+      .setName(data.name)
+      .build();
+      this.store.dispatch(new contactActions.Create(contact));
+      this.store.dispatch(new contactActions.Load(contact.id));
+    }
+  };
+
   private cardSelected(contact: Contact) {
     this.store.dispatch(new contactActions.Load(contact.id));
-    this.navCtrl.push(ContactPage);
   }
 
   private getStoreData(): any {
     this.contacts$ = this.store.select(fromContacts.getAllContacts);
+    this.selectedContact$ = this.store.select(fromContacts.getSelectedContact);
+  }
+
+  private subscribeToSelectedContact(): any {
+    this.selectedContact$.subscribe(contact => {
+      if(contact) {
+        this.navCtrl.push(ContactPage);
+      }
+    });
   }
 
 }
