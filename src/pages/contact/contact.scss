@@ -1,3 +1,29 @@
 page-contact {
 
 }
+
+.card-background-page-contact {
+
+    margin: -16px -16px 10px -16px;
+    width: initial;
+    position: relative;
+    text-align: center;
+    height: 175px;
+
+  .card-title {
+    position: absolute;
+    top: 25%;
+    font-size: 2.3em;
+    width: 100%;
+    color: #fff;
+  }
+
+  .card-subtitle {
+    font-size: 1.2em;
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    color: #fff;
+  }
+
+}

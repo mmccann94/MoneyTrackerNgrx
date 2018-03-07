@@ -1,16 +1,29 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      <!-- {{selectedContact$.name | async}} -->
+      Details
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Transactions</ion-list-header>
-    <ion-item *ngFor="let transaction of transactions$ | async">
-      {{transaction.amount}}
-    </ion-item>
-  </ion-list>
+  <div *ngIf="contact">
+    <ion-card class="card-background-page-contact">
+      <img src="assets/imgs/contact-card-backgound-planks.jpg" />
+      <div class="card-title">{{contact.name}}</div>
+      <div class="card-subtitle" *ngIf="contact.balance < 0">
+        You owe {{contact.balance | currency:'GBP':true:'.2-2'}}
+      </div>
+      <div class="card-subtitle" *ngIf="contact.balance > 0">
+        You're owed {{contact.balance | currency:'GBP':true:'.2-2'}}
+      </div>
+      <div class="card-subtitle" *ngIf="contact.balance === 0">
+        Balance: {{0 | currency:'GBP':true:'.2-2' }}
+      </div>
+    </ion-card>
+  </div>
+  <div *ngIf="!contact">
+    <p>Could not load Contact Details...</p>
+  </div>
+
 </ion-content>

@@ -14,21 +14,22 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ContactPage {
 
-  selectedContact$: Observable<Contact>;
-  transactions$: Observable<Transaction[]>;
-  transactionSubscription: Subscription;
+  contact: Contact;
+  selectedContactListener: Subscription;
+  
 
   constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>) {
+    this.createSelectedContactListener();
   }
 
-  ionViewDidLoad() {
-    this.selectedContact$ = this.store.select(fromContacts.getSelectedContact)
-    this.transactions$ = this.store.select(fromContacts.getTransactionsForContact);
-    // this.transactionSubscription = this.transactions$.subscribe(transactions => console.log('transactions', transactions));
+  createSelectedContactListener(): void {
+    this.selectedContactListener = this.store.select(fromContacts.getSelectedContact).subscribe(contact => {
+      this.contact = contact;
+    });
   }
 
   ionViewWillLeave() {
-    // this.transactionSubscription.unsubscribe();
+    this.selectedContactListener.unsubscribe();
   }
 
 }
