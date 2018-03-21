@@ -31,7 +31,7 @@ export class ContactBuilder {
     }
 
     build(): Contact {
-        return {id: this.id, name: this.name, balance: this.balance, transactions: this.transactions};
+        return new Contact(this.id, this.name, this.balance, this.transactions);
     }
 
 }

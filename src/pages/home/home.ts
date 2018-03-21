@@ -18,8 +18,8 @@ import { ContactBuilder } from '../../core/contact.builder';
 })
 export class HomePage {
 
-  public contacts$: Observable<any>;
-  public selectedContact$: Observable<any>;
+  public contacts$: Observable<Contact[]>;
+  public selectedContact$: Observable<Contact>;
 
   constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>, private alertService: AlertService) {
     this.getStoreData();

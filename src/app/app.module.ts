@@ -15,6 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ContactsModule } from '../store/contacts/contacts.module';
 import { CoreModule } from '../core/core.module';
 import { AlertService } from '../core/alert/alert.service';
+import { TextAvatarDirective } from '../core/text-avatar/text-avatar';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AlertService } from '../core/alert/alert.service';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    TextAvatarDirective
   ],
   imports: [
     BrowserModule,

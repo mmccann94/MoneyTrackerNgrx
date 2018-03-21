@@ -7,7 +7,7 @@ import { AlertService } from "./alert/alert.service";
     imports: [
         CommonModule
     ],
-    declarations: [
+    declarations: [     
     ],
     providers: [
         AlertService,

@@ -12,10 +12,10 @@
       <img src="assets/imgs/contact-card-backgound-planks.jpg" />
       <div class="card-title">{{contact.name}}</div>
       <div class="card-subtitle" *ngIf="contact.balance < 0">
-        You owe {{contact.balance | currency:'GBP':true:'.2-2'}}
+        You owe {{contact.getAbsoluteBalance() | currency:'GBP':true:'.2-2'}}
       </div>
       <div class="card-subtitle" *ngIf="contact.balance > 0">
-        You're owed {{contact.balance | currency:'GBP':true:'.2-2'}}
+        You're owed {{contact.getAbsoluteBalance() | currency:'GBP':true:'.2-2'}}
       </div>
       <div class="card-subtitle" *ngIf="contact.balance === 0">
         Balance: {{0 | currency:'GBP':true:'.2-2' }}

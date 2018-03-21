@@ -15,18 +15,8 @@ const initialState: State = adapter.getInitialState({
   selectedContactId: null,
   ids: ['1', '2'],
   entities: {
-    '1': {
-      id: '1',
-      name: 'Marty',
-      balance: 5,
-      transactions: ['1', '2']
-    },
-    '2': {
-      id: '2',
-      name: 'Rianne',
-      balance: 10,
-      transactions: []
-    }
+    '1': new Contact('1', 'Marty', -5, ['1', '2']),
+    '2': new Contact('2', 'Rianne', 10, [])
   }
 });
 
