@@ -15,4 +15,12 @@ export class Contact {
     public getAbsoluteBalance(): number {
         return Math.abs(this.balance);
     }
+
+    public owesMoney(): boolean {
+        return this.balance < 0 ? true : false;
+    }
+
+    public owedMoney(): boolean {
+        return this.balance > 0 ? true : false;
+    }
  }

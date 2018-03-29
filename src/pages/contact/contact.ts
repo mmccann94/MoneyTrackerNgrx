@@ -28,6 +28,26 @@ export class ContactPage {
     });
   }
 
+  getCreditContactButtonText(): string {
+    if(this.contact.owesMoney()) {
+      return 'Lend';
+    } else if (this.contact.owedMoney()) {
+      return 'Pay';
+    } else {
+      return 'Lend';
+    }
+  }
+
+  getDebitContactButtonText(): string {
+    if(this.contact.owesMoney()) {
+      return 'Receive';
+    } else if (this.contact.owedMoney()) {
+      return 'Borrow';
+    } else {
+      return 'Borrow';
+    }
+  }
+
   ionViewWillLeave() {
     this.selectedContactListener.unsubscribe();
   }

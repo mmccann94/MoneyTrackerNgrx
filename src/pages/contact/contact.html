@@ -11,10 +11,10 @@
     <ion-card class="card-background-page-contact">
       <img src="assets/imgs/contact-card-backgound-planks.jpg" />
       <div class="card-title">{{contact.name}}</div>
-      <div class="card-subtitle" *ngIf="contact.balance < 0">
+      <div class="card-subtitle" *ngIf="contact.owedMoney()">
         You owe {{contact.getAbsoluteBalance() | currency:'GBP':true:'.2-2'}}
       </div>
-      <div class="card-subtitle" *ngIf="contact.balance > 0">
+      <div class="card-subtitle" *ngIf="contact.owesMoney() > 0">
         You're owed {{contact.getAbsoluteBalance() | currency:'GBP':true:'.2-2'}}
       </div>
       <div class="card-subtitle" *ngIf="contact.balance === 0">
@@ -22,8 +22,18 @@
       </div>
     </ion-card>
   </div>
+
+  <ion-row>
+    <ion-col width-6>
+        <button full ion-button>{{getDebitContactButtonText()}}</button>
+    </ion-col>
+    <ion-col width-6>
+        <button full ion-button>{{getCreditContactButtonText()}}</button>
+    </ion-col>
+  </ion-row>
+
+
   <div *ngIf="!contact">
     <p>Could not load Contact Details...</p>
   </div>
-
 </ion-content>
