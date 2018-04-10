@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Receive payment from {{contact.name}}</ion-title> 
+      <!-- TODO update message below to be read from somewhere. maybe a transactiontype enum with various message as a value -->
+      <ion-buttons end>
+            <button ion-button icon-only (click)="close()">
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form [formGroup]="formGroup" (ngSubmit)="submit()">
+        <ion-item>
+            <ion-label>Amount</ion-label>
+            <ion-input type="text" formControlName="amount"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Notes</ion-label>
+            <ion-textarea formControlName="notes"></ion-textarea>
+        </ion-item>
+        <button ion-button full type="submit" [disabled]="!formGroup.valid">Submit</button>
+    </form>
+  </ion-content>
+  

@@ -16,6 +16,8 @@ import { ContactsModule } from '../store/contacts/contacts.module';
 import { CoreModule } from '../core/core.module';
 import { AlertService } from '../core/alert/alert.service';
 import { TextAvatarDirective } from '../core/text-avatar/text-avatar';
+import { ModalService } from '../core/modal/modal.service';
+import { NewTransactionModal } from '../core/modal/new-transaction/new-transaction.modal';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { TextAvatarDirective } from '../core/text-avatar/text-avatar';
     ContactPage,
     HomePage,
     TabsPage,
-    TextAvatarDirective
+    TextAvatarDirective,
+    NewTransactionModal
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { TextAvatarDirective } from '../core/text-avatar/text-avatar';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AlertService
+    AlertService,
+    ModalService
   ]
 })
 export class AppModule {}

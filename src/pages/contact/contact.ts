@@ -7,6 +7,7 @@ import * as fromContacts from '../../store/contacts/reducers';
 import * as contactActions from '../../store/contacts/actions/contact.actions';
 import { Transaction } from '../../model/transaction';
 import { Subscription } from 'rxjs/Subscription';
+import { ModalService } from '../../core/modal/modal.service';
 
 @Component({
   selector: 'page-contact',
@@ -18,7 +19,7 @@ export class ContactPage {
   selectedContactListener: Subscription;
   
 
-  constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>) {
+  constructor(public navCtrl: NavController, private store: Store<fromContacts.ContactsState>, private modalService: ModalService) {
     this.createSelectedContactListener();
   }
 
@@ -46,6 +47,11 @@ export class ContactPage {
     } else {
       return 'Borrow';
     }
+  }
+
+  newTransactionButtonClicked(transactionType: string) {
+    console.log('new transaction', transactionType)
+    this.modalService.activateNewTransactionModal(this.contact);
   }
 
   ionViewWillLeave() {
